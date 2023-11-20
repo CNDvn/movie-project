@@ -1,0 +1,11 @@
+ENVIRONMENT=
+PORT=
+
+# kafka
+KAFKA_URL=
+
+# services
+USER_MANAGEMENT_SVC_URL=
+
+# proto file
+PROTO_FILE_REPO_URL=

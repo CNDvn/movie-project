@@ -1,0 +1,31 @@
+version: '2'
+
+volumes:
+  postgres_data:
+      driver: local
+
+networks:
+  microservice:
+    name: microservice-network
+    external: true
+
+services:
+  keycloak:
+      image: quay.io/keycloak/keycloak:legacy
+      container_name: keycloak
+      environment:
+        DB_VENDOR: POSTGRES
+        DB_ADDR: postgres
+        DB_DATABASE: $POSTGRES_DB_USER_MANAGEMENT_SVC
+        DB_USER: $POSTGRES_USER
+        DB_SCHEMA: public
+        DB_PASSWORD: $POSTGRES_PASSWORD
+        KEYCLOAK_USER: $KEYCLOAK_USER 
+        KEYCLOAK_PASSWORD: $KEYCLOAK_PASSWORD 
+        # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. 
+        # It is highly recommended that you read the PostgreSQL JDBC driver documentation in order to use it.
+        #JDBC_PARAMS: "ssl=true"
+      networks:
+        - microservice
+      ports:
+        - 8080:8080

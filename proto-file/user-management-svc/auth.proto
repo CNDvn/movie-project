@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package auth;
+
+service AuthService{
+    rpc signIn (AccountId) returns (AccountInfo) {}
+    rpc signUp (AccountId) returns (AccountInfo) {}
+    rpc signOut (AccountId) returns (AccountInfo) {}
+}
+
+message AccountId {
+    int32 id = 1;
+}
+
+message AccountInfo {
+    int32 id = 1;
+    string name = 2;
+}

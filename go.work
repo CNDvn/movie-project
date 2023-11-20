@@ -1,0 +1,6 @@
+go 1.21.3
+
+use (
+	./file-upload-svc
+	./video-process-svc
+)
