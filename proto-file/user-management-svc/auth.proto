@@ -2,17 +2,41 @@ syntax = "proto3";
 
 package auth;
 
-service AuthService{
-    rpc signIn (AccountId) returns (AccountInfo) {}
-    rpc signUp (AccountId) returns (AccountInfo) {}
-    rpc signOut (AccountId) returns (AccountInfo) {}
+message SignInRequest {
+    string username = 1;
+    string password = 2;
 }
 
-message AccountId {
-    int32 id = 1;
+message SignUpRequest  {
+    string username = 1;
+    string password = 2;
+    string name = 3;
+    string birthDay = 4;
 }
 
-message AccountInfo {
-    int32 id = 1;
+message AccountInfoResponse {
+    string id = 1;
     string name = 2;
+    string birthDay = 3;
+}
+
+message AccessToken {
+    string token = 1;
+}
+
+message BaseResponse{
+    string statusCode = 1;
+    string message = 2;
+}
+
+message TokenResponse {
+    BaseResponse message = 1;
+    string access = 2;
+    string refresh = 3;
+}
+
+service AuthService{
+    rpc signIn (SignInRequest) returns (TokenResponse) {}
+    rpc signUp (SignUpRequest) returns (TokenResponse) {}
+    rpc signOut (AccessToken) returns (BaseResponse) {}
 }

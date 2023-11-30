@@ -1,42 +1,36 @@
 import { Controller } from '@nestjs/common';
 import { GrpcMethod } from '@nestjs/microservices';
-import { Metadata, ServerUnaryCall } from '@grpc/grpc-js';
 import { AuthService } from './auth.service';
-import { GrpcServiceName } from 'src/constants';
-import { AccountId, AccountInfo } from './dtos';
-
+import * as ums from 'ums-proto';
 @Controller()
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @GrpcMethod(GrpcServiceName.AUTH_SERVICE, 'signIn')
+  @GrpcMethod(ums.AuthService.name, ums.AuthService.method.SignIn)
   async signIn(
-    data: AccountId,
-    metadata: Metadata,
-    call: ServerUnaryCall<any, any>,
-  ): Promise<AccountInfo> {
-    console.log(metadata);
-    console.log(call);
-    return await this.authService.signIn(data.id);
+    signInReq: ums.SignInRequest,
+    // metadata: Metadata,
+    // call: ServerUnaryCall<any, any>,
+  ): Promise<ums.TokenResponse> {
+    // console.log(metadata);
+    // console.log(call);
+
+    return await this.authService.signIn(signInReq);
   }
-  @GrpcMethod(GrpcServiceName.AUTH_SERVICE, 'signUp')
+  @GrpcMethod(ums.AuthService.name, ums.AuthService.method.SignUp)
   async signUp(
-    data: AccountId,
-    metadata: Metadata,
-    call: ServerUnaryCall<any, any>,
-  ): Promise<AccountInfo> {
-    console.log(metadata);
-    console.log(call);
-    return await this.authService.signUp(data.id);
+    signUpReq: ums.SignUpRequest,
+    // metadata: Metadata,
+    // call: ServerUnaryCall<any, any>,
+  ): Promise<ums.TokenResponse> {
+    return await this.authService.signUp(signUpReq);
   }
-  @GrpcMethod(GrpcServiceName.AUTH_SERVICE, 'signOut')
+  @GrpcMethod(ums.AuthService.name, ums.AuthService.method.SignOut)
   async signOut(
-    data: AccountId,
-    metadata: Metadata,
-    call: ServerUnaryCall<any, any>,
-  ): Promise<AccountInfo> {
-    console.log(metadata);
-    console.log(call);
-    return await this.authService.signOut(data.id);
+    accessToken: ums.AccessToken,
+    // metadata: Metadata,
+    // call: ServerUnaryCall<any, any>,
+  ): Promise<ums.BaseResponse> {
+    return await this.authService.signOut(accessToken);
   }
 }

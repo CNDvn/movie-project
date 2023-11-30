@@ -1,28 +1,26 @@
 import { Injectable } from '@nestjs/common';
+import {
+  AccessToken,
+  BaseResponse,
+  SignInRequest,
+  SignUpRequest,
+  TokenResponse,
+} from 'ums-proto';
 
 @Injectable()
 export class AuthService {
-  public async signIn(accountId: number) {
-    const items = [
-      { id: 1, name: 'John' },
-      { id: 2, name: 'Doe' },
-    ];
-    return items.find(({ id }) => id === accountId);
+  public async signIn(signInReq: SignInRequest): Promise<TokenResponse> {
+    console.log(signInReq);
+    return 'test' as any;
   }
 
-  public async signUp(accountId: number) {
-    const items = [
-      { id: 1, name: 'John' },
-      { id: 2, name: 'Doe' },
-    ];
-    return items.find(({ id }) => id === accountId);
+  public async signUp(signUpReq: SignUpRequest): Promise<TokenResponse> {
+    console.log(signUpReq);
+    return 'test' as any;
   }
 
-  public async signOut(accountId: number) {
-    const items = [
-      { id: 1, name: 'John' },
-      { id: 2, name: 'Doe' },
-    ];
-    return items.find(({ id }) => id === accountId);
+  public async signOut(accessToken: AccessToken): Promise<BaseResponse> {
+    console.log(accessToken);
+    return 'test' as any;
   }
 }
