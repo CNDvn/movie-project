@@ -6,8 +6,21 @@ import {
   TokenResponse,
 } from "./messages";
 
+interface IMethod {
+  signIn: string;
+  signUp: string;
+  signOut: string;
+}
+const methods: IMethod = {
+  signIn: "signIn",
+  signUp: "signUp",
+  signOut: "signOut",
+};
 export abstract class AuthService {
-  abstract SignIn(signInReq: SignInRequest): TokenResponse;
-  abstract SignUp(signUpReq: SignUpRequest): TokenResponse;
-  abstract SignOut(accessToken: AccessToken): BaseResponse;
+  static get methods(): IMethod {
+    return methods;
+  }
+  abstract signIn(signInReq: SignInRequest): TokenResponse;
+  abstract signUp(signUpReq: SignUpRequest): TokenResponse;
+  abstract signOut(accessToken: AccessToken): BaseResponse;
 }

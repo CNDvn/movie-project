@@ -26,7 +26,7 @@ export type BaseResponse = {
 };
 
 export type TokenResponse = {
-  message: BaseResponse;
+  responseStatus: BaseResponse;
   access: string;
   refresh: string;
 };

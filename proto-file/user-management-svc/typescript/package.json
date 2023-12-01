@@ -1,6 +1,12 @@
 {
   "name": "ums-proto",
   "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "main":"./dist/index.js",
+  "scripts": {
+    "build":"tsc"
+  },
+  "dependencies": {
+    "typescript": "^5.3.2"
+  }
 }

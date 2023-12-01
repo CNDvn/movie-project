@@ -11,7 +11,14 @@ import {
 export class AuthService {
   public async signIn(signInReq: SignInRequest): Promise<TokenResponse> {
     console.log(signInReq);
-    return 'test' as any;
+    return {
+      access: '123dsa',
+      refresh: 'dsadasdas',
+      responseStatus: {
+        message: '123',
+        statusCode: 'SUCCESS',
+      },
+    };
   }
 
   public async signUp(signUpReq: SignUpRequest): Promise<TokenResponse> {

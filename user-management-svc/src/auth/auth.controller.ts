@@ -6,7 +6,7 @@ import * as ums from 'ums-proto';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @GrpcMethod(ums.AuthService.name, ums.AuthService.method.SignIn)
+  @GrpcMethod(ums.AuthService.name, ums.AuthService.methods.signIn)
   async signIn(
     signInReq: ums.SignInRequest,
     // metadata: Metadata,
@@ -17,7 +17,7 @@ export class AuthController {
 
     return await this.authService.signIn(signInReq);
   }
-  @GrpcMethod(ums.AuthService.name, ums.AuthService.method.SignUp)
+  @GrpcMethod(ums.AuthService.name, ums.AuthService.methods.signUp)
   async signUp(
     signUpReq: ums.SignUpRequest,
     // metadata: Metadata,
@@ -25,7 +25,7 @@ export class AuthController {
   ): Promise<ums.TokenResponse> {
     return await this.authService.signUp(signUpReq);
   }
-  @GrpcMethod(ums.AuthService.name, ums.AuthService.method.SignOut)
+  @GrpcMethod(ums.AuthService.name, ums.AuthService.methods.signOut)
   async signOut(
     accessToken: ums.AccessToken,
     // metadata: Metadata,
