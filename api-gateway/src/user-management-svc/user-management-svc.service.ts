@@ -2,11 +2,12 @@ import { Injectable, Inject, OnModuleInit } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
 import { HttpService } from '@nestjs/axios';
 import * as ums from 'ums-proto';
+import { EClientName } from '../clients';
 @Injectable()
 export class UserManagementSvcService implements OnModuleInit {
   private authService: ums.AuthService;
   constructor(
-    @Inject('AUTH_PACKAGE') private client: ClientGrpc,
+    @Inject(EClientName.USER_MANAGEMENT_SVC) private client: ClientGrpc,
     private httpService: HttpService,
   ) {}
 

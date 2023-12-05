@@ -15,6 +15,7 @@ async function bootstrap() {
     options: {
       client: {
         brokers: [internalConfig.kafka.url],
+        clientId: 'VIDEO_METADATA_SVC',
       },
     },
   });
