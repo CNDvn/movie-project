@@ -11,20 +11,22 @@ networks:
 
 services:
   keycloak:
-      image: quay.io/keycloak/keycloak:legacy
+      image: quay.io/keycloak/keycloak:23.0.3
       container_name: keycloak
       environment:
-        DB_VENDOR: POSTGRES
-        DB_ADDR: postgres
-        DB_DATABASE: $POSTGRES_DB_USER_MANAGEMENT_SVC
-        DB_USER: $POSTGRES_USER
-        DB_SCHEMA: public
-        DB_PASSWORD: $POSTGRES_PASSWORD
-        KEYCLOAK_USER: $KEYCLOAK_USER 
-        KEYCLOAK_PASSWORD: $KEYCLOAK_PASSWORD 
+        KC_DB: postgres
+        KC_DB_URL_HOST: postgres
+        KC_DB_URL_PORT: 5432
+        KC_DB_URL_DATABASE: $POSTGRES_DB_USER_MANAGEMENT_SVC
+        KC_DB_USERNAME: $POSTGRES_USER
+        KC_DB_SCHEMA: public
+        KC_DB_PASSWORD: $POSTGRES_PASSWORD
+        KEYCLOAK_ADMIN: $KEYCLOAK_USER 
+        KEYCLOAK_ADMIN_PASSWORD: $KEYCLOAK_PASSWORD 
         # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. 
         # It is highly recommended that you read the PostgreSQL JDBC driver documentation in order to use it.
         #JDBC_PARAMS: "ssl=true"
+      command: start-dev
       networks:
         - microservice
       ports:
